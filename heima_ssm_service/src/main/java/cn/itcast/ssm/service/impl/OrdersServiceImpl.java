@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
 public class OrdersServiceImpl implements OrdersService {
     @Autowired
     private OrdersDao ordersDao;
