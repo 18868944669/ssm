@@ -5,7 +5,6 @@
        xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
     <context:component-scan base-package="cn.itcast.ssm.service"/>
-    <context:component-scan base-package="cn.itcast.ssm.dao"/>
 
     <context:property-placeholder location="classpath:db.properties"/>
     <!-- 配合C3P0连接池 -->
@@ -56,5 +55,5 @@
             <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1"/>
         </aop:config>
     <!-- 开启spring对注解事务的支持-->
-    <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+    <tx:annotation-driven/>
 </beans>
