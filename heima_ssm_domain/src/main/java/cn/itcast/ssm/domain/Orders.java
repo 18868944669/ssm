@@ -32,6 +32,7 @@ public class Orders implements Serializable {
     public String getOrderTimeStr() {
         if (orderTime != null) {
             orderTimeStr = DateUtils.dateToString(orderTime, "yyyy-MM-dd HH:mm");
+
         }
         return orderTimeStr;
     }
