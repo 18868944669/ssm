@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     private List<SimpleGrantedAuthority> getAuthority(List<Role> roles) {
+        //定义一个集合
         List<SimpleGrantedAuthority> authoritys = new ArrayList();
         for (Role role : roles) {
             authoritys.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName().toUpperCase()));
