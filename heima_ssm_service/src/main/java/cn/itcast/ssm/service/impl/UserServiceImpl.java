@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserInfo userInfo = null;
+
         try {
             userInfo = userDao.findByUsername(username);
         } catch (Exception e) {
@@ -41,7 +42,7 @@ public class UserServiceImpl implements UserService {
     private List<SimpleGrantedAuthority> getAuthority(List<Role> roles) {
         List<SimpleGrantedAuthority> authoritys = new ArrayList();
         for (Role role : roles) {
-            authoritys.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
+            authoritys.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName().toUpperCase()));
         }
         return authoritys;
     }
@@ -89,6 +90,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据用户ID查询所有可以添加的角色
+     *
      * @param userId
      * @return
      * @throws Exception
@@ -100,6 +102,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 给用户添加角色
+     *
      * @param userId
      * @param roleIds
      * @throws Exception
@@ -107,7 +110,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addRoleToUser(String userId, String[] roleIds) throws Exception {
         for (String roleId : roleIds) {
-            userDao.addRoleToUser(userId,roleId);
+            userDao.addRoleToUser(userId, roleId);
         }
     }
 }

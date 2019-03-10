@@ -12,10 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.annotation.RequestScope;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Date;
 
@@ -30,7 +28,7 @@ public class LogAop {
     //开始时间
     private Date visitTime;
     //访问的类
-    private Class aClass;
+    private Class clz;
     //访问的方法
     private Method method;
 
@@ -43,17 +41,17 @@ public class LogAop {
     @Before("execution(* cn.itcast.ssm.controller.*.*(..))")
     public void beBefore(JoinPoint joinPoint) throws NoSuchMethodException {
         visitTime = new Date();// 获取访问时间
-        aClass = joinPoint.getTarget().getClass(); //获取当前访问的类
+        clz = joinPoint.getTarget().getClass(); //获取当前访问的类
         String methodName = joinPoint.getSignature().getName();//获取当前访问的类的方法名字
         Object[] args = joinPoint.getArgs();//获取当前访问的类的方法的参数
         if (args == null || args.length == 0) {
-            method = aClass.getMethod(methodName);
+            method = clz.getMethod(methodName);
         } else {
             Class[] classes = new Class[args.length];
             for (int i = 0; i < args.length; i++) {
                 classes[i] = args[i].getClass();
             }
-            method = aClass.getMethod(methodName, classes);
+            method = clz.getMethod(methodName, classes);
         }
     }
 
@@ -67,8 +65,8 @@ public class LogAop {
         long time = new Date().getTime() - visitTime.getTime(); // 获取访问时长
         //获取访问的url
         String url = "";
-        if (aClass != null && method != null && aClass != LogAop.class && aClass != SysLogController.class) {
-            RequestMapping classAnnotation = (RequestMapping) aClass.getAnnotation(RequestMapping.class);
+        if (clz != null && method != null && clz != LogAop.class && clz != SysLogController.class) {
+            RequestMapping classAnnotation = (RequestMapping) clz.getAnnotation(RequestMapping.class);
             if (classAnnotation != null) {
                 String[] classValue = classAnnotation.value();
                 RequestMapping methodAnnotation = method.getAnnotation(RequestMapping.class);
@@ -91,7 +89,7 @@ public class LogAop {
                     sysLog.setExecutionTime(time);
                     sysLog.setIp(ip);
                     sysLog.setUrl(url);
-                    sysLog.setMethod("类名:" + aClass.getName() + ",方法名:" + method.getName());
+                    sysLog.setMethod("类名:" + clz.getName() + ",方法名:" + method.getName());
 
 
                     sysLogService.save(sysLog);

@@ -14,7 +14,7 @@
     <!--设置配置文件的路径-->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml,classpath:springsecurity.xml</param-value>
+        <param-value>classpath*:applicationContext.xml,classpath*:springsecurity.xml</param-value>
     </context-param>
     <!-- 配置 spring mvc 的核心控制器 -->
     <servlet>
@@ -23,7 +23,7 @@
         <!-- 配置初始化参数，用于读取 springmvc 的配置文件 -->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:springmvc.xml</param-value>
+            <param-value>classpath*:springmvc.xml</param-value>
         </init-param>
         <!-- 配置 servlet 的对象的创建时间点：应用加载时创建。取值只能是非 0 正整数，表示启动顺序 -->
         <load-on-startup>1</load-on-startup>

@@ -26,7 +26,13 @@
         <!-- 配置具体的拦截的规则 pattern="请求路径的规则" access="访问系统的人，必须有ROLE_USER的角色" -->
         <security:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 
-        <!-- 定义跳转的具体的页面 -->
+        <!-- 定义跳转的具体的页面
+        login-page:自定义登录页面
+        login-processing-url:
+        default-target-url:登陆成功后跳转的页面。
+        authentication-failure-url:用户权限校验失败之后才会跳转到这个页面，如果数据库中没有这个用户则不会跳转到这个页面。
+        authentication-success-forward-url:用户权限校验成功之后会转发到这个页面
+        -->
         <security:form-login
                 login-page="/login.jsp"
                 login-processing-url="/login.do"
@@ -38,7 +44,7 @@
         <!-- 关闭跨域请求 -->
         <security:csrf disabled="true"/>
 
-        <!-- 退出 -->
+        <!-- 退出                                                                         -->
         <security:logout invalidate-session="true" logout-url="/logout.do" logout-success-url="/login.jsp" />
 
     </security:http>

@@ -13,4 +13,5 @@ public class Role {
     private String roleDesc; //角色描述
     private List<Permission> permissions;
     private List<User> users;
+
 }
