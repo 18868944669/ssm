@@ -5,6 +5,8 @@ import cn.itcast.ssm.domain.Product;
 import cn.itcast.ssm.service.ProductService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +44,8 @@ public class ProductController {
      *
      * @param product
      */
+//    @Secured("ROLE_ADMIN")
+//    @PreAuthorize("authentication.principal.username=='tom' or hasRole('ADMIN')")
     @RequestMapping("/save.do")
     public String save(Product product) throws Exception {
         productService.save(product);

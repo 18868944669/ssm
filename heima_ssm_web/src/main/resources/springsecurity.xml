@@ -15,6 +15,8 @@
     <security:http pattern="/plugins/**" security="none"/>
 
     <security:global-method-security jsr250-annotations="enabled"/>
+    <security:global-method-security secured-annotations="enabled"/>
+    <security:global-method-security pre-post-annotations="enabled"/>
 
 
     <!-- 
