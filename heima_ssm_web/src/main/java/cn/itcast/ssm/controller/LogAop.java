@@ -80,6 +80,8 @@ public class LogAop {
 
                     //获取当前操作的用户,可以通过securityContext获取，也可以从request.getSession中获取
                     SecurityContext context = SecurityContextHolder.getContext();
+                    //也可以当前获取操作的用户名
+                    //String username = context.getAuthentication().getName();
                     User user = (User) context.getAuthentication().getPrincipal();
                     String username = user.getUsername();
 

@@ -45,7 +45,7 @@ public class ProductController {
      * @param product
      */
 //    @Secured("ROLE_ADMIN")
-//    @PreAuthorize("authentication.principal.username=='tom' or hasRole('ADMIN')")
+//    @PreAuthorize("authentication.principal.username=='tom' or hasRole('ROLE_ADMIN')")
     @RequestMapping("/save.do")
     public String save(Product product) throws Exception {
         productService.save(product);
